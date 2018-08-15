@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<TextView
+    android:id="@+id/orderDetails1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="30sp"
+    android:textStyle="bold"
+    android:text="ADMIN DEVICE CALL YOU"/>
+    <TextView
+        android:id="@+id/orderDetails2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recieve"
+        android:text="Recieve"
+        android:textColor="@android:color/white"
+        android:background="#228B22"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"/>
 
-</LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/delivery"
+        android:text="Deliver"
+        android:layout_below="@+id/recieve"
+        android:textColor="@android:color/white"
+        android:background="#FF6347"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

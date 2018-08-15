@@ -1,64 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/customerPhoneText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="56dp">
+        android:layout_gravity="center"
+        android:text="Costumer Phone" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Costumer Phone" />
+    <EditText
+        android:id="@+id/customerPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Enter costumer phone" />
 
-        <EditText
-            android:id="@+id/customerPhone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter costumer phone" />
+    <TextView
+        android:id="@+id/balanceTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Balance Time:" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Balance Time:" />
+    <EditText
+        android:id="@+id/balanceTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="Enter balance time" />
 
-        <EditText
-            android:id="@+id/balanceTime"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter balance time" />
+    <Button
+        android:id="@+id/callDriver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="CALL DRIVER"
+        android:textColor="@android:color/white"
+        android:background="#228B22"
+        android:textStyle="bold"
+        android:padding="12dp"
+        android:theme="@style/CallDriver.Button" />
 
-        <Button
-            android:id="@+id/callDriver"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:layout_marginTop="24dp"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:theme="@style/CallDriver.Button"
-            android:textColor="@android:color/white"
-            android:padding="30dp"
-            android:text="CALL DRIVER" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+    <Button
+        android:id="@+id/hostry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="#000080"
+        android:textStyle="bold"
+        android:text="HOSTRY" />
 
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="LOGOUT" />
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:backgroundTint="#FF6347"
+        android:text="LOGOUT" />
 
-        <Button
-            android:id="@+id/hostry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:backgroundTint="#ffaa00"
-            android:text="HOSTRY" />
-    </LinearLayout>
-
-</ScrollView>
+    </RelativeLayout>
+</LinearLayout>

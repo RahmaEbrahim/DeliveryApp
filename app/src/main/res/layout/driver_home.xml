@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="BUSY"
         app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.Button"
         app:layout_constraintStart_toStartOf="parent" />
 
 
