@@ -53,19 +53,6 @@ public class DriverHome extends Activity {
             } catch (Exception ex) {
             }
         }
-        driverHostry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try{
-
-                    Intent intent = new Intent(DriverHome.this,DriverNotification.class);
-                    startActivity(intent);
-
-                }
-
-                catch (Exception ex){}
-            }
-        });
         driverLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,5 +71,12 @@ public class DriverHome extends Activity {
             }
         });
 
+        driverHostry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DriverHome.this,DriverHistory.class);
+                startActivity(intent);
+            }
+        });
     }
 }

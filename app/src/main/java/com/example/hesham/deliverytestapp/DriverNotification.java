@@ -39,8 +39,8 @@ Button accept;
         setContentView(R.layout.driver_notification);
         timeBalance = (TextView) findViewById(R.id.timeBalance);
         Session session = Session.getIntsance();
-        timeBalance.setText(session.getTimeBalance(), TextView.BufferType.EDITABLE);
-
+        Log.d(TAG, "session content is : " +session.toString());
+        timeBalance.setText(session.getTimeBalance() +"Minute", TextView.BufferType.EDITABLE);
         accept = (Button)findViewById(R.id.accept);
         accept.setOnClickListener(new View.OnClickListener() {
             @Override

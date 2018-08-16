@@ -37,8 +37,8 @@ import static android.content.ContentValues.TAG;
 
 public class AdminHome extends Activity {
 
-    TextView balanceTime, customerPhone;
-    Button callDriver , logout;
+    TextView balanceTime, customerNumber;
+    Button callDriver , logout,history;
    // ProgressDialog dialog = new ProgressDialog(AdminHome.this);
 
     @Override
@@ -62,31 +62,42 @@ public class AdminHome extends Activity {
                     }
                 });*/
         balanceTime = (EditText) findViewById(R.id.balanceTime);
-        customerPhone = (EditText) findViewById(R.id.customerPhone);
+        customerNumber = (EditText) findViewById(R.id.customerPhone);
         callDriver = (Button) findViewById(R.id.callDriver);
         logout = (Button)  findViewById(R.id.logout);
+        history = (Button) findViewById(R.id.hostry);
 
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminHome.this,AdminHistory.class);
+                startActivity(intent);
+            }
+        });
         callDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     if (balanceTime.getText().toString().matches("")){
-                        Toast.makeText(AdminHome.this, "You did not enter a Balance Time", Toast.LENGTH_SHORT).show();
-                    }
-                    if (customerPhone.getText().toString().matches("")){
-                        Toast.makeText(AdminHome.this, "You did not enter a Customer Phone", Toast.LENGTH_SHORT).show();
-                    }
-                   // callDriver.setVisibility(Button.GONE);
+                        balanceTime.setError("You did not enter your Balance Time"); }
+
+                    if (customerNumber.getText().toString().matches("")){
+                        customerNumber.setError("You did not enter your Custome Number"); }
+
+                    else{
+                        // callDriver.setVisibility(Button.GONE);
 //                    dialog.setCancelable(true);
 //                    dialog.setTitle("Wait");
 //                    dialog.setMessage("Calling Driver.");
 //                    dialog.show();
-                    Session session =  Session.getIntsance();
-                    session.setTimeBalance(balanceTime.getText().toString());
-                    GetText();
-                } catch (Exception ex) {
+                        Session session =  Session.getIntsance();
+                        session.setTimeBalance(balanceTime.getText().toString());
+                        GetText();}
                 }
-            }
+                 catch (Exception ex) {
+                }
+        }
+
         });
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +118,10 @@ public class AdminHome extends Activity {
 
         public void GetText () throws UnsupportedEncodingException {
             new AdminHome.HttpRequestTask().execute();
-        }
+            Toast.makeText(AdminHome.this, "Order has been sent",
+                    Toast.LENGTH_LONG).show();
+            finish();
+            startActivity(getIntent());        }
 
 
         private class HttpRequestTask extends AsyncTask<Void, Void, Boolean> {
@@ -115,7 +129,7 @@ public class AdminHome extends Activity {
             protected Boolean doInBackground(Void... params) {
                 try {
                     NotificationMessage notificationMessage = new NotificationMessage();
-                    notificationMessage.setCustomerNumber(customerPhone.getText().toString());
+                    notificationMessage.setCustomerNumber(customerNumber.getText().toString());
                     notificationMessage.setTimeBalance(balanceTime.getText().toString());
                     notificationMessage.setTopicName("news");
                     notificationMessage.setMessageBody("New order has been submitted");

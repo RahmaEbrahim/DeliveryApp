@@ -33,16 +33,12 @@
         <activity android:name=".DriverHome"/>
         <activity android:name=".DriverNotification"/>
         <activity android:name=".DriverDeliveryState"/>
+        <activity android:name=".AdminHistory"/>
+        <activity android:name=".DriverHistory"/>
         <service
             android:name=".MyAndroidFirebaseMsgService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
-        <service
-            android:name=".MyAndroidFirebaseInstanceIdService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
 

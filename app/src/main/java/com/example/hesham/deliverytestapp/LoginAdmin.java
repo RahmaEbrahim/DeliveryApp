@@ -1,9 +1,12 @@
 package com.example.hesham.deliverytestapp;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,18 +24,18 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.UnsupportedEncodingException;
 
-public class LoginAdmin extends AppCompatActivity {
+public class LoginAdmin extends Activity {
 
+    private static final String TAG = "LoginAdmin";
     EditText adminUserName, adminPassword;
     String adminUserNameS, adminPasswordS;
     Button adminLogin;
-    private static final String TAG = "LoginAdmin";
+    private ProgressDialog dialog;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_admin);
-        //   String adminUserName, adminPassword;
         adminUserName = (EditText) findViewById(R.id.adminUserName);
         adminPassword = (EditText) findViewById(R.id.adminPassword);
         adminLogin = (Button) findViewById(R.id.adminLogin);
@@ -41,16 +44,15 @@ public class LoginAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    if (adminUserName.getText().toString().matches("")){
-                        Toast.makeText(LoginAdmin.this, "You did not enter your UserName", Toast.LENGTH_SHORT).show();
+                    if (adminUserName.getText().toString().matches("")) {
+                        adminUserName.setError("You did not enter your UserName");
                     }
-                    if (adminPassword.getText().toString().matches("")){
-                        Toast.makeText(LoginAdmin.this, "You did not enter your Password", Toast.LENGTH_SHORT).show();
+                    if (adminPassword.getText().toString().matches("")) {
+                        adminPassword.setError("You did not enter your Password");
                     }
-                    /*getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);*/
-                    adminLogin.setVisibility(Button.GONE);
-                    ProgressDialog.show(LoginAdmin.this, "Loading", "Wait while Loging in...");
+                    else
+                   // adminLogin.setVisibility(Button.GONE);
+                    // new MyProgressDialog().execute();
                     GetText();
 
                 } catch (Exception e) {
@@ -60,9 +62,11 @@ public class LoginAdmin extends AppCompatActivity {
         });
     }
 
-    public void GetText() throws UnsupportedEncodingException {
-        new HttpRequestTask().execute();
 
+    public void GetText() throws UnsupportedEncodingException {
+      //   dialog.show(LoginAdmin.this, "Loading", "Wait while Logging in...");
+        new HttpRequestTask().execute();
+          ///dialog.dismiss();
     }
 
     private class HttpRequestTask extends AsyncTask<Void, Void, Boolean> {
@@ -71,11 +75,11 @@ public class LoginAdmin extends AppCompatActivity {
             try {
                 adminUserNameS = adminUserName.getText().toString();
                 adminPasswordS = adminPassword.getText().toString();
-                Session session  =  Session.getIntsance();
+                Session session = Session.getIntsance();
                 session.setUserName(adminUserNameS);
                 session.setPassword(adminPasswordS);
                 session.setAdmin(Boolean.TRUE);
-                Log.d("session",session.getUserName());
+                Log.d("session", session.getUserName());
                 final String url = "https://mysterious-forest-44790.herokuapp.com/delivery/admin/" + adminUserNameS + "/" + adminPasswordS;
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
@@ -87,8 +91,17 @@ public class LoginAdmin extends AppCompatActivity {
                     return true;
 
                 } else {
+
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                       //     dialog.dismiss();
+                            Toast.makeText(LoginAdmin.this, "please check your UserName or Password", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 1000);
                     return false;
-                    }
+                }
             } catch (Exception e) {
 
                 Log.e("MainActivity", e.getMessage(), e);
@@ -97,4 +110,5 @@ public class LoginAdmin extends AppCompatActivity {
             return null;
         }
     }
+
 }

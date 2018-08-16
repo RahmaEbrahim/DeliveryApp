@@ -26,6 +26,8 @@ public class DriverDeliveryState extends Activity {
     Button recieve,delivery;
     String msgType,msgBody;
     TextView orderDetails;
+    NotificationMessage notificationMessage = new NotificationMessage();
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -55,7 +57,6 @@ public class DriverDeliveryState extends Activity {
                     msgType = "DriverDeliveredOrder";
                     msgBody = "Order has beed delivered";
                     sendNotification();
-
                 }
                 catch(Exception ex){}
             }
@@ -71,7 +72,6 @@ public class DriverDeliveryState extends Activity {
         protected Boolean doInBackground(Void... params) {
             try {
 
-                NotificationMessage notificationMessage = new NotificationMessage();
                 notificationMessage.setTopicName("admin");
                 notificationMessage.setMessageBody(msgBody);
                 notificationMessage.setMessageType(msgType);

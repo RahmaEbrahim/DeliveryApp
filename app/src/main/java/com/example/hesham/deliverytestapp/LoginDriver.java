@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -48,17 +50,14 @@ public class LoginDriver extends Activity {
             public void onClick(View view) {
                 try {
                     if (driverUserName.getText().toString().matches("")){
-                        Toast.makeText(LoginDriver.this, "You did not enter your UserName", Toast.LENGTH_SHORT).show();
-                    }
+                        driverUserName.setError("You did not enter your UserName"); }
                     if (driverPassword.getText().toString().matches("")){
-                        Toast.makeText(LoginDriver.this, "You did not enter your Password", Toast.LENGTH_SHORT).show();
+                        driverPassword.setError("You did not enter your UserName");
                     }
-                    driverLogin.setVisibility(Button.GONE);
-                    ProgressDialog.show(LoginDriver.this, "Loading", "Wait while Loging in...");
+                    //driverLogin.setVisibility(Button.GONE);
+                    //ProgressDialog.show(LoginDriver.this, "Loading", "Wait while Logging in...");
+                    else
                     GetText();
-
-
-
                 } catch (Exception ex) {
                 }
             }
@@ -66,8 +65,6 @@ public class LoginDriver extends Activity {
     }
     public void GetText() throws UnsupportedEncodingException {
         new LoginDriver.HttpRequestTask().execute();
-
-
     }
     private class HttpRequestTask extends AsyncTask<Void, Void, Boolean> {
         @Override
@@ -94,8 +91,15 @@ public class LoginDriver extends Activity {
                 }
                 else
                 {
-                    return false;
-                }
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //dialog.dismiss();
+                            Toast.makeText(LoginDriver.this, "please check your UserName or Password", Toast.LENGTH_SHORT).show();
+                        }
+                    }, 1000);
+                    return false;                }
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
             }

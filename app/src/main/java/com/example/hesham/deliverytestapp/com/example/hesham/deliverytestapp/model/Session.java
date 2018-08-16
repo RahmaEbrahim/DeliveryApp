@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 
 public class Session {
 
-   private String userName,password,timeBalance;
+   private String userName,password,timeBalance,message,custumerPhone;
    private boolean admin;
    private static Session session = null;
 
@@ -52,9 +52,34 @@ public class Session {
     public String getTimeBalance() {
         return timeBalance;
     }
-
     public void setTimeBalance(String timeBalance) {
         this.timeBalance = timeBalance;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getCustumerPhone() {
+        return custumerPhone;
+    }
+
+    public void setCustumerPhone(String custumerPhone) {
+        this.custumerPhone = custumerPhone;
+    }
+
+    @Override
+    public String toString() {
+        return "Session{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", timeBalance='" + timeBalance + '\'' +
+                ", admin=" + admin +
+                '}';
     }
 }
 
