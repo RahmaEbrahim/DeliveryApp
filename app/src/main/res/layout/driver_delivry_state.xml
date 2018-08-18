@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/orderDetails1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ADMIN DEVICE CALL YOU"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/orderDetails2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-    <Button
+    <TextView
+        android:id="@+id/orderDetails1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="ADMIN DEVICE CALL YOU"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/orderDetails2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
         android:id="@+id/recieve"
-        android:text="Recieve"
-        android:textColor="@android:color/white"
-        android:background="#228B22"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/delivery"
-        android:text="Deliver"
-        android:layout_below="@+id/recieve"
+        android:layout_centerInParent="true"
+        android:background="#228B22"
+        android:text="Receive"
         android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/delivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
         android:background="#FF6347"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
-</RelativeLayout>
+        android:text="Deliver"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+    <!--android:layout_below="@+id/recieve"-->
+
+</LinearLayout>

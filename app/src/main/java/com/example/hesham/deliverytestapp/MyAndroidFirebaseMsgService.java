@@ -21,7 +21,7 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
     private static final String TAG = "MyAndroidFCMService";
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
+        super.onMessageReceived(remoteMessage);
         Log.d(TAG, "From: " + remoteMessage.getFrom());
         Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
         //create notification
@@ -35,27 +35,27 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
                 if (session.getAdmin() == false) {
                     session.setTimeBalance(map.get("balanceTime"));
                     createNotification(remoteMessage.getNotification().getBody() , map.get("messageType"),DriverNotification.class);
-                    startActivity(new Intent(this, DriverNotification.class));
+                    startActivity(new Intent(this, DriverNotification.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
                 break;
             case "DriverAcceptedOrder":
                 if (session.getAdmin() == true) {
                     createNotification(remoteMessage.getNotification().getBody(), map.get("messageType"),AdminHome.class);
-                    startActivity(new Intent(this, AdminHistory.class));
+                    startActivity(new Intent(this, AdminHistory.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                 }
                 break;
             case "DriverRecievedOrder":
                 if (session.getAdmin() == true) {
                     createNotification(remoteMessage.getNotification().getBody(), map.get("messageType"),AdminHome.class);
-                    startActivity(new Intent(this, AdminHistory.class));
+                    startActivity(new Intent(this, AdminHistory.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                 }
                 break;
             case "DriverDeliveredOrder":
                 if (session.getAdmin() == true) {
                     createNotification(remoteMessage.getNotification().getBody(), map.get("messageType"),AdminHome.class);
-                    startActivity(new Intent(this, AdminHistory.class));
+                    startActivity(new Intent(this, AdminHistory.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                 }
                 break;
@@ -72,12 +72,6 @@ public class MyAndroidFirebaseMsgService extends FirebaseMessagingService {
                 .setContentText(messageBody);
 /*                .setAutoCancel( true )
                 .setSound(notificationSoundURI);*/
-                //.setContentIntent(resultIntent);
-       /* Intent notificationIntent = new Intent(this, DriverDeliveryState.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent,
-                PendingIntent.FLAG_ONE_SHOT);
-        mNotificationBuilder.setContentIntent(contentIntent);*/
-
         NotificationManager notificationManager =
                 (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, mNotificationBuilder.build());

@@ -2,6 +2,7 @@ package com.example.hesham.deliverytestapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class DriverDeliveryState extends Activity {
             @Override
             public void onClick(View view) {
                 try{
+                    recieve.setBackgroundColor(Color.parseColor("#DCDCDC"));
                     msgBody ="Order has been recieved";
                     msgType = "DriverRecievedOrder";
                     sendNotification();
@@ -54,6 +56,7 @@ public class DriverDeliveryState extends Activity {
             @Override
             public void onClick(View view) {
                 try{
+                    delivery.setBackgroundColor(Color.parseColor("#DCDCDC"));
                     msgType = "DriverDeliveredOrder";
                     msgBody = "Order has beed delivered";
                     sendNotification();

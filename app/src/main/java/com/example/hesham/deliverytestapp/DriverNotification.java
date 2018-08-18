@@ -2,6 +2,7 @@ package com.example.hesham.deliverytestapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +47,7 @@ Button accept;
             @Override
             public void onClick(View view) {
                 try{
+                    accept.setBackgroundColor(Color.parseColor("#DCDCDC"));
                     sendNotification();
                     Intent intent = new Intent(DriverNotification.this,DriverDeliveryState.class);
                     startActivity(intent);

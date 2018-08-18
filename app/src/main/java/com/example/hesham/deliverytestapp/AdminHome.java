@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.example.hesham.deliverytestapp.com.example.hesham.deliverytestapp.model.NotificationMessage;
 import com.example.hesham.deliverytestapp.com.example.hesham.deliverytestapp.model.Session;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -47,20 +49,8 @@ public class AdminHome extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_home);
 
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("news");
       FirebaseMessaging.getInstance().subscribeToTopic("admin");
-                /*.addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                     //   Session session = new Session(getApplicationContext());
-                        String msg = getString(R.string.msg_subscribed);
-                       // String msg = session.getUserName();
-                        if (!task.isSuccessful()) {
-                            msg = getString(R.string.msg_subscribe_failed);
-                        }
-                        Log.d(TAG, msg);
-                        Toast.makeText(AdminHome.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });*/
         balanceTime = (EditText) findViewById(R.id.balanceTime);
         customerNumber = (EditText) findViewById(R.id.customerPhone);
         callDriver = (Button) findViewById(R.id.callDriver);
@@ -70,6 +60,7 @@ public class AdminHome extends Activity {
         history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                history.setBackgroundColor(Color.parseColor("#DCDCDC"));
                 Intent intent = new Intent(AdminHome.this,AdminHistory.class);
                 startActivity(intent);
             }
@@ -90,6 +81,7 @@ public class AdminHome extends Activity {
 //                    dialog.setTitle("Wait");
 //                    dialog.setMessage("Calling Driver.");
 //                    dialog.show();
+                        callDriver.setBackgroundColor(Color.parseColor("#DCDCDC"));
                         Session session =  Session.getIntsance();
                         session.setTimeBalance(balanceTime.getText().toString());
                         GetText();}
@@ -104,9 +96,10 @@ public class AdminHome extends Activity {
             @Override
             public void onClick(View view) {
                 try{
-
+                    logout.setBackgroundColor(Color.parseColor("#DCDCDC"));
                     Session session = Session.getIntsance();
                     session.logout();
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic("admin");
                     Intent intent = new Intent(AdminHome.this,MainActivity.class);
                     startActivity(intent);
                 }

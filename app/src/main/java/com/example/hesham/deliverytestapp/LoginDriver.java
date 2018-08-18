@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,8 +57,9 @@ public class LoginDriver extends Activity {
                     }
                     //driverLogin.setVisibility(Button.GONE);
                     //ProgressDialog.show(LoginDriver.this, "Loading", "Wait while Logging in...");
-                    else
-                    GetText();
+                    else{
+                        driverLogin.setBackgroundColor(Color.parseColor("#DCDCDC"));
+                        GetText();}
                 } catch (Exception ex) {
                 }
             }

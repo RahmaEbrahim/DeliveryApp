@@ -20,6 +20,10 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
+        <meta-data android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +40,8 @@
         <activity android:name=".AdminHistory"/>
         <activity android:name=".DriverHistory"/>
         <service
-            android:name=".MyAndroidFirebaseMsgService">
+            android:name=".MyAndroidFirebaseMsgService" android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
